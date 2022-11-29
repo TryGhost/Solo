@@ -767,6 +767,22 @@ hr {
     }
 }
 
+.anchor-link {
+    opacity: 0;
+    text-decoration: none;
+    margin-left: 0em;
+}
+
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+    opacity: 1;
+    text-decoration: none;
+}
+
 /* Custom CTA
 /* ---------------------------------------------------------- */
 
