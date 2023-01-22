@@ -1,16 +1,23 @@
 {{!< default}}
 
 <section class="gh-about gh-outer{{#match @custom.header_section_layout "!=" "Typographic profile"}}{{#unless @site.cover_image}} no-image{{/unless}}{{else}}{{#unless @site.icon}} no-image{{/unless}}{{/match}}">
+    {{#if @custom.flip_columns}}
+        {{#if @custom.primary_header}}
+            <h1 class="gh-about-primary showOnMedia">{{{@custom.primary_header}}}</h1>
+        {{/if}}
+    {{/if}}
     <div class="gh-about-inner gh-inner">
-        {{#match @custom.header_section_layout "!=" "Typographic profile"}}
-            {{#if @site.cover_image}}
-                <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
-            {{/if}}
-        {{else}}
-            {{#if @site.icon}}
-                <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
-            {{/if}}
-        {{/match}}
+        {{^if @custom.flip_columns}}
+            {{#match @custom.header_section_layout "!=" "Typographic profile"}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+                {{/if}}
+            {{else}}
+                {{#if @site.icon}}
+                    <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
+                {{/if}}
+            {{/match}}
+        {{/if}}
         <script>
             (function () {
                 if (!document.body.classList.contains('has-background-about')) return;
@@ -27,7 +34,7 @@
         <div class="gh-about-content">
             <div class="gh-about-content-inner">
                 {{#if @custom.primary_header}}
-                    <h1 class="gh-about-primary">{{{@custom.primary_header}}}</h1>
+                    <h1 class="gh-about-primary HideOnMedia">{{{@custom.primary_header}}}</h1>
                 {{/if}}
                 {{#if @custom.secondary_header}}
                     <p class="gh-about-secondary">{{{@custom.secondary_header}}}</p>
@@ -42,6 +49,17 @@
                 {{/if}}
             </div>
         </div>
+        {{#if @custom.flip_columns}}
+            {{#match @custom.header_section_layout "!=" "Typographic profile"}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+                {{/if}}
+            {{else}}
+                {{#if @site.icon}}
+                    <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
+                {{/if}}
+            {{/match}}
+        {{/if}}
     </div>
 </section>
 

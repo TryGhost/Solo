@@ -1,7 +1,7 @@
 {
     "name": "solo",
-    "description": "A Ghost theme",
-    "version": "1.0.0",
+    "description": "A clean, minimal personal Theme for the Ghost publishing platform",
+    "version": "1.0.1",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -46,6 +46,22 @@
                 "type": "color",
                 "default": "#ffffff"
             },
+            "text_color": {
+                "type": "color",
+                "default": "#000000"
+            },
+            "link_of_lottie_json_file": {
+                "type": "text",
+                "default": ""
+            },
+            "show_site_title": {
+                "type": "boolean",
+                "default": false
+            },
+            "show_site_description": {
+                "type": "boolean",
+                "default": false
+            },
             "navigation_layout": {
                 "type": "select",
                 "options": ["Logo on the left", "Logo in the middle", "Stacked"],
@@ -79,6 +95,15 @@
                 "type": "select",
                 "options": ["Classic", "Typographic", "Parallax"],
                 "default": "Classic",
+                "group": "homepage"
+            },
+            "show_search_icon": {
+                "type": "boolean",
+                "default": true
+            },
+            "flip_columns": {
+                "type": "boolean",
+                "default": false,
                 "group": "homepage"
             }
         }
