@@ -1,201 +1,74 @@
-<!DOCTYPE html>
-<html lang="{{@site.locale}}">
+{{!< default}}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
-
-    {{#is "home"}}
-        {{#if @site.cover_image}}
-            <link rel="preload" as="image" href="{{@site.cover_image}}">
+<section class="gh-about gh-outer{{#match @custom.header_section_layout "!=" "Typographic profile"}}{{#unless @site.cover_image}} no-image{{/unless}}{{else}}{{#unless @site.icon}} no-image{{/unless}}{{/match}}">
+    {{#if @custom.flip_columns}}
+        {{#if @custom.primary_header}}
+            <h1 class="gh-about-primary showOnMedia">{{{@custom.primary_header}}}</h1>
         {{/if}}
-    {{/is}}
-
-    <style>
-        :root {
-            --background-color: {{@custom.background_color}}
-        }
-
-        *, html, :root, body, h1, h2, h3, h4, h5, h6, p, a, div, .gh-foot a:hover {
-            color: {{@custom.text_color}};
-        }
-
-            {{#if @custom.flip_columns}}
-            .showOnMedia {
-                font-size: 0;
-                visibility: hidden;
-            }
-
-            @media only screen and (max-width: 840px) {
-                .HideOnMedia {
-                    font-size: 0;
-                    visibility: hidden;
-                }
-
-                .showOnMedia {
-                    font-size: clamp(3.2rem, 2.4452rem + 2.0968vw, 5.8rem);
-                    visibility: visible;
-                    margin-bottom: 50px;
-                }
-            }
-            {{/if}}
-
-        .gh-about-inner.gh-inner {
-            gap: 50px;
-        }
-    </style>
-
-    <script>
-        /* The script for calculating the color contrast was taken from
-        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
-        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
-        accentColor = accentColor.trim().slice(1);
-        var r = parseInt(accentColor.substr(0, 2), 16);
-        var g = parseInt(accentColor.substr(2, 2), 16);
-        var b = parseInt(accentColor.substr(4, 2), 16);
-        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        var textColor = (yiq >= 128) ? 'dark' : 'light';
-
-        document.documentElement.className = `has-${textColor}-text`;
-    </script>
-
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-    {{ghost_head}}
-
-    <meta name="theme-color" content="{{@site.accent_color}}"/>
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="{{@site.accent_color}}"/>
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{@site.accent_color}}"/>
-
-</head>
-
-<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.typography "Elegant serif"}} has-serif-font{{/match}}{{#match @custom.typography "Consistent mono"}} has-mono-font{{/match}}{{#match @custom.post_feed_layout "Classic"}} has-classic-feed{{/match}}{{#match @custom.post_feed_layout "Typographic"}} has-typographic-feed{{/match}}{{#match @custom.post_feed_layout "Parallax"}} has-parallax-feed{{/match}}">
-<div class="gh-site">
-
-    <header id="gh-head" class="gh-head gh-outer">
-        <div class="gh-head-inner gh-inner">
-            <div class="gh-head-brand">
-                <div class="gh-head-brand-wrapper">
-                    {{#if @site.logo}}
-                        {{#if @custom.link_of_lottie_json_file}}
-                            <a class="gh-head-logo playLottie" href="{{@site.url}}">
-                                <lottie-player
-                                        src="{{@custom.link_of_lottie_json_file}}" speed="1.5" style="width: 75px;">
-                                </lottie-player>
-                            </a>
-                            {{#if @custom.show_site_title}}
-                            <p class="gh-head-logo"><a class="gh-head-logo" href="{{@site.url}}">{{@site.title}}</a>
-                            {{/if}}
-                            {{#if @custom.show_site_description}}
-                                <br/><span class="gh-head-logo" style="font-size: 1.5rem">{{@site.description}}</span>
-                            {{/if}}
-                        </p>
-                        {{else}}
-                            <a class="gh-head-logo" href="{{@site.url}}"><img style="max-height: 75px;" src="{{@site.logo}}" alt="Logo"></a>
-                            {{#if @custom.show_site_title}}
-                            <p class="gh-head-logo"><a class="gh-head-logo" href="{{@site.url}}">{{@site.title}}</a>
-                            {{/if}}
-                            {{#if @custom.show_site_description}}
-                                <br/><span class="gh-head-logo" style="font-size: 1.5rem">{{@site.description}}</span>
-                            {{/if}}
-                        </p>
-                        {{/if}}
-                    {{else}}
-                        <p class="gh-head-logo"><a class="gh-head-logo" href="{{@site.url}}">{{@site.title}}</a>
-                            {{#if @custom.show_site_description}}
-                                <br/><span class="gh-head-logo" style="font-size: 1.5rem">{{@site.description}}</span>
-                            {{/if}}
-                        </p>
-                    {{/if}}
-                </div>
-                {{#if @custom.show_search_icon}}
-                    <button class="gh-search gh-icon-btn" data-ghost-search>{{> "icons/search"}}</button>
+    {{/if}}
+    <div class="gh-about-inner gh-inner">
+        {{^if @custom.flip_columns}}
+            {{#match @custom.header_section_layout "!=" "Typographic profile"}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
                 {{/if}}
-                <button class="gh-burger"></button>
-            </div>
+            {{else}}
+                {{#if @site.icon}}
+                    <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
+                {{/if}}
+            {{/match}}
+        {{/if}}
+        <script>
+            (function () {
+                if (!document.body.classList.contains('has-background-about')) return;
 
-            <nav class="gh-head-menu">
-                {{navigation}}
-                {{#unless @site.members_enabled}}
-                    {{#match @custom.navigation_layout "Stacked"}}
-                        {{#if @custom.show_search_icon}}
-                            <button class="gh-search gh-icon-btn" data-ghost-search>{{> "icons/search"}}</button>
-                        {{/if}}
-                    {{/match}}
-                {{/unless}}
-            </nav>
+                const about = document.querySelector('.gh-about');
+                if (!about) return;
 
-            <div class="gh-head-actions">
-                {{#unless @site.members_enabled}}
-                    {{^match @custom.navigation_layout "Stacked"}}
-                        {{#if @custom.show_search_icon}}
-                            <button class="gh-search gh-icon-btn" data-ghost-search>{{> "icons/search"}}</button>
-                        {{/if}}
-                    {{/match}}
-                {{else}}
-                    {{#if @custom.show_search_icon}}
-                        <button class="gh-search gh-icon-btn" data-ghost-search>{{> "icons/search"}}</button>
-                    {{/if}}
-                    <div class="gh-head-members">
-                        {{#unless @member}}
-                            {{#unless @site.members_invite_only}}
-                                <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Subscribe</a>
-                            {{else}}
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signin" data-portal="signin">Sign in</a>
-                            {{/unless}}
-                        {{else}}
-                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
-                        {{/unless}}
-                    </div>
-                {{/unless}}
+                const image = about.querySelector('.gh-about-image');
+
+                about.style.setProperty('--about-height', image.clientWidth * image.naturalHeight / image.naturalWidth + 'px');
+                about.classList.add('initialized');
+            })();
+        </script>
+        <div class="gh-about-content">
+            <div class="gh-about-content-inner">
+                {{#if @custom.primary_header}}
+                    <h1 class="gh-about-primary HideOnMedia">{{{@custom.primary_header}}}</h1>
+                {{/if}}
+                {{#if @custom.secondary_header}}
+                    <p class="gh-about-secondary">{{{@custom.secondary_header}}}</p>
+                {{/if}}
+                {{#if @site.members_enabled}}
+                    {{#unless @member}}
+                        <div class="gh-subscribe-input" data-portal>
+                            jamie@example.com
+                            <span class="gh-btn gh-primary-btn">Subscribe</span>
+                        </div>
+                    {{/unless}}
+                {{/if}}
             </div>
         </div>
-    </header>
+        {{#if @custom.flip_columns}}
+            {{#match @custom.header_section_layout "!=" "Typographic profile"}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+                {{/if}}
+            {{else}}
+                {{#if @site.icon}}
+                    <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
+                {{/if}}
+            {{/match}}
+        {{/if}}
+    </div>
+</section>
 
-    {{{body}}}
+<main class="gh-main gh-outer">
+    <div class="gh-feed gh-inner">
+        {{#foreach posts}}
+            {{> "loop"}}
+        {{/foreach}}
+    </div>
+</main>
 
-    <footer class="gh-foot gh-outer">
-        <div class="gh-foot-inner gh-inner">
-            <nav class="gh-foot-menu">
-                {{navigation type="secondary"}}
-            </nav>
-
-            <div class="gh-copyright">
-                {{#unless @custom.footer_text}}
-                    {{@site.title}} &copy; {{date format="YYYY"}}. Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
-                {{else}}
-                    {{@custom.footer_text}}
-                {{/unless}}
-            </div>
-        </div>
-    </footer>
-
-</div>
-
-{{#is "post, page"}}
-    {{> "pswp"}}
-{{/is}}
-
-<script src="{{asset "built/main.min.js"}}"></script>
-
-<script>
-    const containerPlayer = document.querySelectorAll(".playLottie");
-    const play = (container, direction) => {
-        const player = container.querySelector("lottie-player");
-        player.setDirection(direction);
-        player.play();
-    };
-    containerPlayer.forEach(container => {
-        container.addEventListener("mouseover", () => play(container, 1));
-        container.addEventListener("mouseleave", () => play(container, -1));
-    });
-</script>
-
-{{ghost_foot}}
-
-</body>
-
-</html>
+{{#contentFor "body_class"}}{{#match @custom.header_section_layout "Side by side"}} has-side-about{{/match}}{{#match @custom.header_section_layout "Large background"}}{{#if @site.cover_image}} is-head-transparent has-background-about{{else}} has-side-about{{/if}}{{/match}}{{#match @custom.header_section_layout "Typographic profile"}}{{#if @site.icon}} has-typographic-about{{else}} has-side-about{{/if}}{{/match}}{{/contentFor}}
