@@ -27,10 +27,6 @@
                 {{/if}}
             {{/match}}
             <footer class="gh-card-meta">
-                <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
-                {{#if reading_time}}
-                    <span class="gh-card-length">{{reading_time}}</span>
-                {{/if}}
                 {{#unless access}}
                 {{^has visibility="public"}}
                     <span class="gh-card-access">
