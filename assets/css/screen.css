@@ -1,4 +1,4 @@
-@import "@tryghost/shared-theme-assets/assets/css/screen.css";
+@import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
 
 :root {
@@ -115,7 +115,8 @@ hr {
     max-height: 48px;
 }
 
-.gh-head-menu {
+.gh-head-menu,
+.gh-head-link {
     font-weight: 700;
 }
 
@@ -129,7 +130,7 @@ hr {
 }
 
 @media (max-width: 991px) {
-    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) :is(#gh-head, #gh-head .gh-head-actions) {
         background-color: var(--background-color);
     }
 }
@@ -139,6 +140,10 @@ hr {
 
 .gh-about {
     margin-bottom: 40px;
+}
+
+.gh-about-content {
+    word-break: break-word;
 }
 
 .gh-about-primary {
@@ -334,6 +339,7 @@ hr {
 
 .gh-card-title {
     font-weight: 800;
+    word-break: break-word;
 }
 
 .has-serif-font .gh-card-title {
