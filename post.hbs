@@ -40,7 +40,7 @@
                             <time class="gh-article-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time></div>
                             {{#if tags}}
                                 <div class="gh-article-tags">
-                                    {{#foreach}}
+                                    {{#foreach tags}}
                                         <a class="gh-article-tag tag--{{slug}}" href="{{url}}" style="--tag-color: {{accent_color}}">{{name}}</a>
                                     {{/foreach}}
                                 </div>
