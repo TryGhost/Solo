@@ -45,7 +45,11 @@
                 <div class="gh-head-brand-wrapper">
                     <a class="gh-head-logo" href="{{@site.url}}">
                         {{#if @site.logo}}
-                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                            <img srcset="{{img_url @site.logo size="s"}} 300w,
+                                {{img_url @site.logo size="m"}} 600w"
+                                sizes="(max-width: 600px) 50vw, 40vw"
+                            src="{{img_url @site.logo size="s"}}" alt="{{@site.title}}"
+                            >
                         {{else}}
                             {{@site.title}}
                         {{/if}}
