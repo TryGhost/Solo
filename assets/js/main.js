@@ -55,7 +55,7 @@ function initParallax() {
 
 (function (window, document) {
     var addAnchors = () => {
-        var headings = document.querySelectorAll('.gh-content h1, .gh-content h2, .gh-content h3, gh-.content h4, .gh-content h5, .gh-content h6')
+        var headings = document.querySelectorAll('.gh-content h1, .gh-content h2, .gh-content h3, .gh-content h4, .gh-content h5, .gh-content h6')
         headings.forEach((heading) => {
             heading.insertAdjacentHTML('beforeend', `
                 <button class="anchor-link" aria-label="Copy link to this section">
