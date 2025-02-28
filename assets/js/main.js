@@ -64,24 +64,17 @@ function initParallax() {
             `)
 
             const anchor = heading.querySelector('.anchor-link');
-            anchor.addEventListener('click', (e) => {
+            anchor.addEventListener('click', async (e) => {
                 e.preventDefault();
                 const url = new URL(window.location.href);
                 url.hash = heading.id;
                 
-                // Try modern clipboard API first
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(url.toString())
-                        .then(() => {
-                            showCopiedFeedback(anchor);
-                        })
-                        .catch(() => {
-                            // Fallback for clipboard API failure
-                            fallbackCopy(url.toString(), anchor);
-                        });
-                } else {
-                    // Fallback for browsers without clipboard API
-                    fallbackCopy(url.toString(), anchor);
+                try {
+                    await navigator.clipboard.writeText(url.toString());
+                    showCopiedFeedback(anchor);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    anchor.setAttribute('aria-label', 'Failed to copy link');
                 }
             });
         });
@@ -89,44 +82,12 @@ function initParallax() {
 
     function showCopiedFeedback(element) {
         element.classList.add('copied');
-        // For screen readers
         element.setAttribute('aria-label', 'Link copied to clipboard');
         
         setTimeout(() => {
             element.classList.remove('copied');
             element.setAttribute('aria-label', 'Copy link to this section');
         }, 2000);
-    }
-
-    function fallbackCopy(text, element) {
-        // Create temporary input
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'fixed';  // Avoid scrolling to bottom
-        document.body.appendChild(textArea);
-        
-        // Handle iOS devices
-        if (navigator.userAgent.match(/ipad|iphone/i)) {
-            textArea.contentEditable = true;
-            textArea.readOnly = true;
-            const range = document.createRange();
-            range.selectNodeContents(textArea);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            textArea.setSelectionRange(0, 999999);
-        } else {
-            textArea.select();
-        }
-
-        try {
-            document.execCommand('copy');
-            showCopiedFeedback(element);
-        } catch (err) {
-            console.error('Fallback copy failed:', err);
-        }
-
-        document.body.removeChild(textArea);
     }
 
     document.addEventListener('DOMContentLoaded', addAnchors)
