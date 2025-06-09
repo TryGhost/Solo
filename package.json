@@ -48,12 +48,20 @@
             },
             "navigation_layout": {
                 "type": "select",
-                "options": ["Logo on the left", "Logo in the middle", "Stacked"],
+                "options": [
+                    "Logo on the left",
+                    "Logo in the middle",
+                    "Stacked"
+                ],
                 "default": "Logo on the left"
             },
             "typography": {
                 "type": "select",
-                "options": ["Modern sans-serif", "Elegant serif", "Consistent mono"],
+                "options": [
+                    "Modern sans-serif",
+                    "Elegant serif",
+                    "Consistent mono"
+                ],
                 "default": "Modern sans-serif"
             },
             "footer_text": {
@@ -61,7 +69,11 @@
             },
             "header_section_layout": {
                 "type": "select",
-                "options": ["Side by side", "Large background", "Typographic profile"],
+                "options": [
+                    "Side by side",
+                    "Large background",
+                    "Typographic profile"
+                ],
                 "default": "Large background",
                 "group": "homepage"
             },
@@ -77,7 +89,11 @@
             },
             "post_feed_layout": {
                 "type": "select",
-                "options": ["Classic", "Typographic", "Parallax"],
+                "options": [
+                    "Classic",
+                    "Typographic",
+                    "Parallax"
+                ],
                 "default": "Classic",
                 "group": "homepage"
             }
@@ -104,5 +120,8 @@
         "postcss": "8.5.4",
         "postcss-easy-import": "4.0.0",
         "pump": "3.0.2"
+    },
+    "dependencies": {
+        "gulp-cli": "^3.1.0"
     }
 }
