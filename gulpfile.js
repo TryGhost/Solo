@@ -62,6 +62,11 @@ function getJsFiles(version) {
 
     jsFiles.push(src(`assets/js/main.js`));
 
+    // Include custom.js if it exists (local customizations)
+    if (fs.existsSync(`assets/js/custom.js`)) {
+        jsFiles.push(src(`assets/js/custom.js`));
+    }
+
     return jsFiles;
 }
 

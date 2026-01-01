@@ -1,0 +1,83 @@
+/* Custom CSS - Local customizations to minimize merge conflicts with upstream
+/* ---------------------------------------------------------- */
+
+/* Anchor Links for Headings
+/* ---------------------------------------------------------- */
+
+.anchor-link {
+    position: relative;
+    opacity: 0;
+    padding: 8px;
+    margin-left: 4px;
+    color: var(--ghost-accent-color);
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tooltip styles */
+.anchor-link::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    background: var(--color-darker-gray);
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Show tooltip on hover */
+.anchor-link:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* When copied, change tooltip text */
+.anchor-link.copied::before {
+    content: attr(data-tooltip-copied);
+}
+
+@media (hover: hover) {
+    .anchor-link {
+        opacity: 0;
+    }
+
+    h1:hover .anchor-link,
+    h2:hover .anchor-link,
+    h3:hover .anchor-link,
+    h4:hover .anchor-link,
+    h5:hover .anchor-link,
+    h6:hover .anchor-link,
+    .anchor-link:focus {
+        opacity: 1;
+    }
+}
+
+@media (hover: none) {
+    .anchor-link {
+        opacity: 0.8;
+    }
+}
+
+.anchor-link.copied {
+    animation: pulse 0.4s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
