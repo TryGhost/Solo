@@ -43,8 +43,11 @@
                                 </div>
                                 <time class="gh-article-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
                             </div>
-                            {{#if primary_tag}}
-                                <a class="gh-article-tag" href="{{primary_tag.url}}" style="--tag-color: {{primary_tag.accent_color}}">{{primary_tag.name}}</a>
+                            {{!-- CUSTOMIZATION: Show all tags instead of just primary_tag --}}
+                            {{#if tags}}
+                                {{#foreach tags}}
+                                    <a class="gh-article-tag" href="{{url}}" style="--tag-color: {{accent_color}}">{{name}}</a>
+                                {{/foreach}}
                             {{/if}}
                         </div>
                     </aside>
