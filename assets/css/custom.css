@@ -1,6 +1,11 @@
 /* Custom CSS - Local customizations to minimize merge conflicts with upstream
 /* ---------------------------------------------------------- */
 
+/* Reduce content spacing (upstream default is 1.5) */
+.gh-content {
+    --content-spacing-multiplier: 1.2;
+}
+
 /* Anchor Links for Headings
 /* ---------------------------------------------------------- */
 
