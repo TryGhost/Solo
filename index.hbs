@@ -3,9 +3,26 @@
 <section class="gh-about gh-outer{{#match @custom.header_section_layout "!=" "Typographic profile"}}{{#unless @site.cover_image}} no-image{{/unless}}{{else}}{{#unless @site.icon}} no-image{{/unless}}{{/match}}">
     <div class="gh-about-inner gh-inner">
         {{#match @custom.header_section_layout "!=" "Typographic profile"}}
-            {{#if @site.cover_image}}
-                <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
-            {{/if}}
+            {{#match @custom.header_section_layout "=" "Large background"}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" 
+                        srcset="{{img_url @site.cover_image size="s"}} 300w,
+                            {{img_url @site.cover_image size="m"}} 720w,
+                            {{img_url @site.cover_image size="l"}} 960w,
+                            {{img_url @site.cover_image size="xl"}} 1200w,
+                            {{img_url @site.cover_image size="xxl"}} 2000w"
+                        sizes="100vw"
+                        src="{{@site.cover_image}}" alt="{{@site.title}}">
+                {{/if}}
+            {{else}}
+                {{#if @site.cover_image}}
+                    <img class="gh-about-image" 
+                        srcset="{{img_url @site.cover_image size="s"}} 300w,
+                            {{img_url @site.cover_image size="m"}} 720w"
+                        sizes="(max-width: 720px) 100vw, 50vw"
+                        src="{{@site.cover_image}}" alt="{{@site.title}}">
+                {{/if}}                
+            {{/match}}
         {{else}}
             {{#if @site.icon}}
                 <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
