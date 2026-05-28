@@ -1,0 +1,100 @@
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<style>
+    .contact-form {
+        max-width: 600px;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #eaeaea;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #5b9df9;
+        box-shadow: 0 0 0 3px rgba(91, 157, 249, 0.2);
+        outline: none;
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .contact-form-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+
+    .contact-form-actions button {
+        justify-self: start;
+        background: var(--background-color, #15171a);
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+
+    .contact-form-actions button:hover {
+        opacity: 0.8;
+    }
+
+    .contact-form-actions .cf-turnstile {
+        justify-self: end;
+    }
+</style>
+
+<form id="contactForm" class="contact-form">
+    <input name="name" placeholder="Your Name" required>
+    <input name="email" type="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <div class="contact-form-actions">
+        <button type="submit">Send</button>
+        <div class="cf-turnstile" data-sitekey="{{@custom.turnstile_sitekey}}" data-theme="light" data-appearance="interaction-only"></div>
+    </div>
+</form>
+
+<script>
+    const form = document.querySelector('#contactForm');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/contact-submission', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (response.status === 200) {
+                form.reset();
+                window.location.href = '{{@custom.contact_form_success_page}}';
+            } else {
+                alert('Something went wrong — please try again later.');
+            }
+        } catch (err) {
+            alert('Error sending your message.');
+            console.error(err);
+        }
+    });
+</script>

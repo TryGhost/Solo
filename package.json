@@ -1,7 +1,7 @@
 {
     "name": "solo",
     "description": "A Ghost theme",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
@@ -42,6 +42,16 @@
         },
         "card_assets": true,
         "custom": {
+            "turnstile_sitekey": {
+                "type": "text",
+                "default": "<input Cloudflare Site Key here>",
+                "description": "Cloudflare Sitekey used for the turnstile captcha in the various forms."
+            },
+            "contact_form_success_page": {
+                "type": "text",
+                "default": "/thanks",
+                "description": "Endpoint for successful submission using contact form."
+            },
             "background_color": {
                 "type": "color",
                 "default": "#ffffff"
