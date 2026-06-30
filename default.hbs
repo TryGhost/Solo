@@ -9,7 +9,12 @@
 
     {{#is "home"}}
         {{#if @site.cover_image}}
+        {{#match @custom.header_section_layout "Large background"}}
             <link rel="preload" as="image" href="{{@site.cover_image}}">
+        {{else match @custom.header_section_layout "Side by side"}}
+            <link rel="preload" as="image" href="{{img_url @site.cover_image size="m"}}">
+        {{/match}}
+
         {{/if}}
     {{/is}}
 
@@ -45,7 +50,11 @@
                 <div class="gh-head-brand-wrapper">
                     <a class="gh-head-logo" href="{{@site.url}}">
                         {{#if @site.logo}}
-                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                            <img srcset="{{img_url @site.logo size="s"}} 300w,
+                                {{img_url @site.logo size="m"}} 720w"
+                                sizes="90vw"
+                            src="{{img_url @site.logo size="s"}}" alt="{{@site.title}}"
+                            >
                         {{else}}
                             {{@site.title}}
                         {{/if}}
